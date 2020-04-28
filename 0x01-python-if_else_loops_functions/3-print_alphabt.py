@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-for a in range(97, 97 + 26):
-    if a == 113 or a == 101:
-        a = +1
+for i in range(97, 123):
+    if i == 101 or i == 113:
+        i = +1
         continue
-    print("{:c}".format(a), end='')
+    print("{:c}".format(i), end='')
