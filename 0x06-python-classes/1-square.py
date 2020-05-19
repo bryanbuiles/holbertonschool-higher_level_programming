@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 '''an empty sqaure
     '''
+''' 
+    Args: 
+        size: size of square
+    '''
 
 
 class Square:
