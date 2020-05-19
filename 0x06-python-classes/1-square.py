@@ -1,10 +1,6 @@
 #!/usr/bin/python3
 '''an empty sqaure
     '''
-''' 
-    Args: 
-        size: size of square
-    '''
 
 
 class Square:
@@ -12,7 +8,7 @@ class Square:
     '''
 
     def __init__(self, size):
-        ''' 
+        ''' __init__ constructor
         Args: 
             size: size of square
         '''
