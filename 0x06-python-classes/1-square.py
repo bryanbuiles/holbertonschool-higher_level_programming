@@ -16,6 +16,6 @@ class Square:
 
         Initializa of class square
         Args: 
-            size(int): size of square
+            size (intiger): size of square
         """
         self.__size = size
