@@ -8,7 +8,7 @@
 class Square:
     """1-square.py
 
-        square class
+    square class
     """
 
     def __init__(self, size):
@@ -16,6 +16,6 @@ class Square:
 
         Initializa of class square
         Args: 
-                size(int): size of square
+            size(int): size of square
         """
         self.__size = size
