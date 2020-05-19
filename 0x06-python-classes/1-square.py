@@ -1,15 +1,17 @@
 #!/usr/bin/python3
-'''an empty sqaure
-    '''
+"""an empty sqaure
+    """
 
 
 class Square:
-    '''an empty sqaure
-    '''
+    """an empty sqaure
+    """
 
     def __init__(self, size):
-        ''' __init__ constructor
+        """ __init__ Constructor
+
+        Initializa of class square
         Args: 
-            size: size of square
-        '''
+            size(int): size of square
+        """
         self.__size = size
