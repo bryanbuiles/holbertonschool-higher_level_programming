@@ -1,10 +1,14 @@
 #!/usr/bin/python3
-"""an empty sqaure
-    """
+"""1-square.py
+
+	square class
+"""
 
 
 class Square:
-    """an empty sqaure
+    """1-square.py
+
+        square class
     """
 
     def __init__(self, size):
@@ -12,6 +16,6 @@ class Square:
 
         Initializa of class square
         Args: 
-            size(int): size of square
+                size(int): size of square
         """
         self.__size = size
