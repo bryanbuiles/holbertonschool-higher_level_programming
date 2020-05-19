@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+'''an empty sqaure
+    '''
+
+
 class Square:
-    ''' an empty sqaure '''
+    '''an empty sqaure
+    '''
     pass
