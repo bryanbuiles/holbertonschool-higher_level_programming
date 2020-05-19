@@ -1,18 +1,18 @@
 #!/usr/bin/python3
 """ 1-square.py
-    Square class with private attribute size
+    Square class 
 """
 
 
 class Square:
     """Square Class
-    Class with private attribute size
+    Class 
     """
 
     def __init__(self, size):
         """__init__ Contructor
         Contructor of class Square
         Args:
-            size (integer): privete attribute for zise Square
+            size (integer): privete attribute for size Square
         """
         self.__size = size
