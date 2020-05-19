@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 """ 2-square.py
-    Square class 
+    Square class
 """
 
 
 class Square:
     """Square Class
-    Class 
+    Class
     """
 
     def __init__(self, size=0):
