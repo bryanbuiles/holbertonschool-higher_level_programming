@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" 3-square.py
+""" 
     Square class
 
     Module Area: return current area square
@@ -20,8 +20,8 @@ class Square:
             position (tuple): private attrinute to posicion
             size (integer): privete attribute for size Square
         """
-        self.__size = size
-        self.__position = position
+        self.size = size
+        self.position = position
 
     def area(self):
         """Return The area of square"""
