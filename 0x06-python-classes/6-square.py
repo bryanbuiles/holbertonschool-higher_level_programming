@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" 
+"""
     Square class
 
     Module Area: return current area square
