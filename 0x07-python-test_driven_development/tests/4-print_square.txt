@@ -1,0 +1,37 @@
+>>> print_square = __import__('4-print_square').print_square
+
+Basic example:
+    >>> print_square(5)
+    #####
+    #####
+    #####
+    #####
+    #####
+
+Non int size:
+    >>> print_square('Bryan')
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+Negative value:
+    >>> print_square(-1)
+    Traceback (most recent call last):
+    ...
+    ValueError: size must be >= 0
+
+0 input:
+    >>> print_square(0)
+
+No input:
+    >>> print_square()
+    Traceback (most recent call last):
+    ...
+    TypeError: print_square() missing 1 required positional argument: 'size'
+
+Float and negative size:
+    >>> print_square(-1.5)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
