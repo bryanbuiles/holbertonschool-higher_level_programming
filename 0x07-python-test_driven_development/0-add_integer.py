@@ -10,9 +10,9 @@ def add_integer(a, b=98):
     """ Return the add of intigers
         a and b are intigers
     """
-    if not isinstance(a, int) and not isinstance(a, float):
+    if not isinstance(a, (int, float)) or isinstance(a, bool):
         raise TypeError("a must be an integer")
-    elif not isinstance(b, int) and not isinstance(b, float):
+    elif not isinstance(b, (int, float)) or isinstance(b, bool):
         raise TypeError("b must be an integer")
     else:
         a = int(round(a))
