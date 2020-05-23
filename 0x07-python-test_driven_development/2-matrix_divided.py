@@ -18,6 +18,8 @@ def matrix_divided(matrix, div):
 
     message = "matrix must be a matrix (list of lists) of integers/floats"
     rlen = -1
+    if type(matrix) != list:
+        raise TypeError(message)
     for items in matrix:
         if type(items) != list:
             raise TypeError(message)

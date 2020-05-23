@@ -48,3 +48,19 @@ TypeError: matrix_divided() missing 1 required positional argument: 'div'
 Traceback (most recent call last):
 ...
 TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
+
+>>> matrix = [[1.33, 2.143, 3.1], [4, 5.0, 6.5]]
+>>> print(matrix_divided(matrix, 3))
+[[0.44, 0.71, 1.03], [1.33, 1.67, 2.17]]
+
+>>> matrix = 4
+>>> print(matrix_divided(matrix, 1))
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix = None
+>>> print(matrix_divided(matrix, 1))
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
