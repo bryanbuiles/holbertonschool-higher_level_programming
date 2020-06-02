@@ -6,10 +6,10 @@
 
 
 
->>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+>>> bgGeometry = __import__('7-bg_geometry').bgGeometry
 
 Proving area function:
-    >>> bg = BaseGeometry()
+    >>> bg = bgGeometry()
     >>> bg.area()
     Traceback (most recent call last):
     ...
@@ -63,3 +63,21 @@ list input:
     ...
     TypeError: bryan must be an integer
 
+>>> try:
+...     bg.integer_validator("don't fail me baby", -1)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+...
+[ValueError] don't fail me baby must be greater than 0
+>>> try:
+...     bg.integer_validator("you failed me", 0)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+...
+[ValueError] you failed me must be greater than 0
+>>> try:
+...     bg.integer_validator("last chance", "wait I'm not a number")
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+...
+[TypeError] last chance must be an integer

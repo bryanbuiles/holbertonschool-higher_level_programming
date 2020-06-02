@@ -34,3 +34,13 @@ Big int in MyList:
 Big int print_sorted:
     >>> my_list.print_sorted()
     [-2, 0, 9999999999999]
+
+just one int in MyList:
+    >>> my_list = MyList()
+    >>> my_list.append(8)
+    >>> print(my_list)
+    [8]
+
+just one int in MyList sorted:
+    >>> my_list.print_sorted()
+    [8]
