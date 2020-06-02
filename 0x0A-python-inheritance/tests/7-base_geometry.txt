@@ -1,0 +1,59 @@
+"""
+    Mylist module test
+
+
+"""
+
+
+
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+Proving area function:
+    >>> bg = BaseGeometry()
+    >>> bg.area()
+    Traceback (most recent call last):
+    ...
+    Exception: area() is not implemented
+
+negative input:
+    >>> bg.integer_validator("bryan", -2)
+    Traceback (most recent call last):
+    ...
+    ValueError: bryan must be greater than 0
+
+infinity input:
+    >>> bg.integer_validator("bryan", float("inf"))
+    Traceback (most recent call last):
+    ...
+    TypeError: bryan must be an integer
+
+non int input:
+    >>> bg.integer_validator("bryan", "superhero")
+    Traceback (most recent call last):
+    ...
+    TypeError: bryan must be an integer
+
+zero input:
+    >>> bg.integer_validator("hello", 0)
+    Traceback (most recent call last):
+    ...
+    ValueError: hello must be greater than 0
+
+float input:
+    >>> bg.integer_validator("bryan", 90.8)
+    Traceback (most recent call last):
+    ...
+    TypeError: bryan must be an integer
+
+no input:
+    >>> bg.integer_validator()
+    Traceback (most recent call last):
+    ...
+    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+list input:
+    >>> bg.integer_validator("bryan", [90])
+    Traceback (most recent call last):
+    ...
+    TypeError: bryan must be an integer
+

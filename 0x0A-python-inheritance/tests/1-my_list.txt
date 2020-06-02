@@ -1,0 +1,23 @@
+"""
+    Mylist module test
+
+
+"""
+
+
+
+>>> MyList = __import__('1-my_list').MyList
+
+
+Basic usage:
+    >>> my_list = MyList()
+    >>> my_list.append(-2)
+    >>> my_list.append(5)
+    >>> my_list.append(2)
+    >>> my_list.append(0)
+    >>> print(my_list)
+    [-2, 5, 2, 0]
+
+Sorted list:
+    >>> my_list.print_sorted()
+    [-2, 0, 2, 5]
