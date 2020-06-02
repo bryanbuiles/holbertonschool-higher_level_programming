@@ -21,3 +21,15 @@ Basic usage:
 Sorted list:
     >>> my_list.print_sorted()
     [-2, 0, 2, 5]
+
+Big int in MyList:
+    >>> my_list = MyList()
+    >>> my_list.append(9999999999999)
+    >>> my_list.append(-2)
+    >>> my_list.append(0)
+    >>> print(my_list)
+    [9999999999999, -2, 0]
+
+Big int print_sorted:
+    >>> my_list.print_sorted()
+    [-2, 0, 9999999999999]
