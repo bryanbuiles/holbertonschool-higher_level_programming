@@ -15,6 +15,9 @@ Proving area function:
     ...
     Exception: area() is not implemented
 
+Basic usage:
+    >>> bg.integer_validator("bryan", 97)
+
 negative input:
     >>> bg.integer_validator("bryan", -2)
     Traceback (most recent call last):
@@ -32,6 +35,9 @@ non int input:
     Traceback (most recent call last):
     ...
     TypeError: bryan must be an integer
+
+Function integer_validator large int input usage:
+    >>> bg.integer_validator("holberton", 9999999999999999999999999)
 
 zero input:
     >>> bg.integer_validator("hello", 0)
