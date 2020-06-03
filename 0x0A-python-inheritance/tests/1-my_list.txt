@@ -57,3 +57,9 @@ only negative int:
 Sorted list:
     >>> my_list.print_sorted()
     [-5, -3, -2, -1]
+
+Test clear:
+    >>> my_list = MyList([1, 2, 20])
+    >>> my_list.clear()
+    >>> print(my_list)
+    []
