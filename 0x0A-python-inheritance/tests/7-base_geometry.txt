@@ -57,8 +57,44 @@ no input:
     ...
     TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
 
+one input:
+    >>> bg.integer_validator("bryan")
+    Traceback (most recent call last):
+    ...
+    TypeError: integer_validator() missing 1 required positional argument: 'value'
+
 list input:
     >>> bg.integer_validator("bryan", [90])
+    Traceback (most recent call last):
+    ...
+    TypeError: bryan must be an integer
+
+nan input:
+    >>> bg.integer_validator("bryan", float('nan'))
+    Traceback (most recent call last):
+    ...
+    TypeError: bryan must be an integer
+
+None input:
+    >>> bg.integer_validator("bryan", None)
+    Traceback (most recent call last):
+    ...
+    TypeError: bryan must be an integer
+
+Tuple input:
+    >>> bg.integer_validator("bryan", (8, 2))
+    Traceback (most recent call last):
+    ...
+    TypeError: bryan must be an integer
+
+bool input:
+    >>> bg.integer_validator("bryan", True)
+    Traceback (most recent call last):
+    ...
+    TypeError: bryan must be an integer
+
+Dict input:
+    >>> bg.integer_validator("bryan", {"brand": "Ford"})
     Traceback (most recent call last):
     ...
     TypeError: bryan must be an integer
@@ -84,3 +120,4 @@ list input:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 ...
 [TypeError] Hello must be an integer
+
