@@ -64,20 +64,20 @@ list input:
     TypeError: bryan must be an integer
 
 >>> try:
-...     bg.integer_validator("don't fail me baby", -1)
+...     bg.integer_validator("Hello", -1)
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 ...
-[ValueError] don't fail me baby must be greater than 0
+[ValueError] Hello must be greater than 0
 >>> try:
-...     bg.integer_validator("you failed me", 0)
+...     bg.integer_validator("bryan", 0)
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 ...
-[ValueError] you failed me must be greater than 0
+[ValueError] bryan must be greater than 0
 >>> try:
-...     bg.integer_validator("last chance", "wait I'm not a number")
+...     bg.integer_validator("Hello", "omg")
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 ...
-[TypeError] last chance must be an integer
+[TypeError] Hello must be an integer

@@ -10,6 +10,8 @@
 
 Basic usage:
     >>> my_list = MyList()
+    >>> print(my_list)
+    []
     >>> my_list.print_sorted()
     []
     >>> my_list.append(-2)
@@ -63,3 +65,13 @@ Test clear:
     >>> my_list.clear()
     >>> print(my_list)
     []
+
+Make Sure Documentation Exists:
+
+    >>> module_documentation = __import__("1-my_list").__doc__
+    >>> print(len(module_documentation) > 0)
+    True
+
+    >>> function_documentation = __import__("1-my_list").is_same_class.__doc__
+    >>> print(len(function_documentation) > 0)
+    True
