@@ -99,6 +99,12 @@ Dict input:
     ...
     TypeError: bryan must be an integer
 
+set input:
+    >>> bg.integer_validator("bryan", {1, 2})
+    Traceback (most recent call last):
+    ...
+    TypeError: bryan must be an integer
+
 >>> bg.integer_validator("my_int", 12)
 >>> bg.integer_validator("width", 89)
 
