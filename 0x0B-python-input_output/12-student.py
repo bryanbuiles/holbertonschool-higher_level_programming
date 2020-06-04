@@ -13,7 +13,7 @@ class Student:
 
     def to_json(self, attrs=None):
         """ return jason dict """
-        if type(attrs) != list or attrs == None:
+        if type(attrs) != list or attrs is None:
             return self.__dict__
         else:
             dic = {}
