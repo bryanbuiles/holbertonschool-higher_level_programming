@@ -33,8 +33,34 @@ class Base:
 
     @staticmethod
     def from_json_string(json_string):
-        if json_string is None or len(json_string) == 0:
+        if type(json_string) != str or len(json_string) == 0:
             lista = []
             return(lista)
         else:
             return json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        if cls.__name__ == "Rectangle":
+            new = cls(1, 1)
+        if cls.__name__ == "Square":
+            new = cls(1)
+        new.update(**dictionary)
+        return(new)
+
+    @classmethod
+    def load_from_file(cls):
+        try:
+            lista = []
+            with open(cls.__name__ + ".json", mode="r", encoding="UTF-8") as f:
+                file = f.read()
+            text = cls.from_json_string(file)
+            for i in text:
+                if type(i) == dict:
+                    lista.append(cls.create(**i))
+                else:
+                    lista.append(i)
+            return (lista)
+        except:
+            lista = []
+            return lista
