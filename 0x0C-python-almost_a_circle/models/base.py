@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Base.py """
 import json
+import csv
 
 
 class Base:
@@ -60,6 +61,30 @@ class Base:
                     lista.append(cls.create(**i))
                 else:
                     lista.append(i)
+            return (lista)
+        except:
+            lista = []
+            return lista
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        dicc = [p.to_dictionary() for p in list_objs]
+        with open(cls.__name__ + ".csv", mode="w", encoding="UTF-8") as f:
+            escribiendo = csv.DictWriter(f, dicc[0].keys())
+            escribiendo.writeheader()
+            escribiendo.writerows(dicc)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        try:
+            lista = []
+            dic = {}
+            with open(cls.__name__ + ".csv", mode="r", encoding="UTF-8") as f:
+                leyendo = csv.DictReader(f)
+                for i in leyendo:
+                    for k, v in dict(i).items():
+                        dic[k] = int(v)
+                    lista.append(cls.create(**dic))
             return (lista)
         except:
             lista = []
