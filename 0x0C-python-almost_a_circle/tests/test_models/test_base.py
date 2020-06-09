@@ -15,11 +15,12 @@ class TestBase(unittest.TestCase):
     """
 
     def tearDown(self):
+        """ tear down """
         Base._Base__nb_objects = 0
         self.assertEqual(Base._Base__nb_objects, 0)
 
     def test_base_instances(self):
-
+        """ test instances """
         test1 = Base()
         test2 = Base(7)
         test3 = Base("bryan")
@@ -47,7 +48,7 @@ class TestBase(unittest.TestCase):
         self.assertEqual(test12.id, (1, 2, 3))
 
     def test_to_json_string(self):
-
+        """ test to_json_string function """
         test1 = [{"bryan": 1, "super": "hero"}]
         test2 = [{"bryan": 3}]
         test3 = None
@@ -68,7 +69,7 @@ class TestBase(unittest.TestCase):
         self.assertEqual(len(Base.to_json_string(None)), 2)
 
     def test_from_json_string(self):
-
+        """ test from_json_string function """
         test1 = [{"bryan": 1, "hero": "too"}]
         result1 = Base.to_json_string(test1)
         test2 = [{"bryan": 3}]
@@ -94,7 +95,7 @@ class TestBase(unittest.TestCase):
         self.assertEqual(len(Base.from_json_string(None)), 0)
 
     def test_create(self):
-
+        """ test for create function """
         test1 = {'id': 2, 'width': 3, 'height': 2, 'x': 3, 'y': 5}
         result1 = Rectangle.create(**test1)
         self.assertEqual(result1.__str__(), '[Rectangle] (2) 3/5 - 3/2')
@@ -111,7 +112,7 @@ class TestBase(unittest.TestCase):
             resultsquare2 = Square.create(**test3)
 
     def test_load_from_file(self):
-
+        """ test for test_load_from_file """
         test1 = Rectangle(5, 2, 7, 7)
         test2 = Rectangle(3, 1, 5)
         test3 = Square(9, 5, 3)
@@ -127,6 +128,25 @@ class TestBase(unittest.TestCase):
         self.assertEqual(rectangler[1].__str__(), '[Rectangle] (2) 5/0 - 3/1')
         self.assertEqual(squarer[0].__str__(), '[Square] (3) 5/3 - 9')
         self.assertEqual(squarer[1].__str__(), '[Square] (4) 5/0 - 8')
+
+        self.assertIsInstance(rectangler[0], Rectangle)
+        self.assertIsInstance(rectangler[1], Rectangle)
+
+        self.assertIsInstance(squarer[0], Square)
+        self.assertIsInstance(squarer[1], Square)
+
+    def test_save_to_file(self):
+        """ test for save_to_file function """
+        test1 = Rectangle(5, 2, 7, 7)
+        test2 = Rectangle(3, 1, 5)
+        test3 = Square(9, 5, 3)
+        test4 = Square(8, 5)
+
+        rectanglesave = Rectangle.save_to_file([test1, test2])
+        squaresave = Square.save_to_file([test3, test4])
+
+        self.assertTrue(os.path.isfile('Rectangle.json'))
+        self.assertTrue(os.path.isfile('Square.json'))
 
 
 if __name__ == '__main__':

@@ -7,6 +7,7 @@ class Rectangle(Base):
     """ class Rectangle  """
 
     def __init__(self, width, height, x=0, y=0, id=None):
+        """ contructor """
         Base.__init__(self, id)
         self.width = width
         self.height = height
@@ -39,6 +40,7 @@ class Rectangle(Base):
 
     @width.setter
     def width(self, value):
+        """ setter for width """
         if not isinstance(value, int) or isinstance(value, bool):
             raise TypeError("width must be an integer")
         if value < 0:
@@ -47,10 +49,12 @@ class Rectangle(Base):
 
     @property
     def x(self):
+        """ getter for x """
         return self.__x
 
     @x.setter
     def x(self, value):
+        """ setter for x """
         if not isinstance(value, int) or isinstance(value, bool):
             raise TypeError("x must be an integer")
         if value < 0:
@@ -59,10 +63,12 @@ class Rectangle(Base):
 
     @property
     def y(self):
+        """ getter for y """
         return self.__y
 
     @y.setter
     def y(self, value):
+        """ setter for y """
         if not isinstance(value, int) or isinstance(value, bool):
             raise TypeError("y must be an integer")
         if value < 0:
@@ -102,6 +108,7 @@ class Rectangle(Base):
                 setattr(self, k, v)
 
     def to_dictionary(self):
+        """ rectangle dictionary """
         dic = {}
         dic["id"] = self.id
         dic["width"] = self.__width

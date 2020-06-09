@@ -2,6 +2,7 @@
 """ Base.py """
 import json
 import csv
+import turtle
 
 
 class Base:
@@ -10,6 +11,7 @@ class Base:
     __nb_objects = 0
 
     def __init__(self, id=None):
+        """ contrutor """
         if id is not None:
             self.id = id
         else:
@@ -18,6 +20,7 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
+        """ return json string """
         if list_dictionaries is None or len(list_dictionaries) == 0:
             return ("[]")
         else:
@@ -25,7 +28,8 @@ class Base:
 
     @classmethod
     def save_to_file(cls, list_objs):
-        with open(cls.__name__ + ".json", mode="w", encoding="UTF-8") as f:
+        """ writes the JSON string representation """
+        with open(cls.__name__ + ".json", mode="w", encoding="utf-8") as f:
             if list_objs is None:
                 f.write("[]")
             else:
@@ -34,6 +38,7 @@ class Base:
 
     @staticmethod
     def from_json_string(json_string):
+        """ returns the list of the JSON string representation """
         if type(json_string) != str or len(json_string) == 0:
             lista = []
             return(lista)
@@ -42,6 +47,7 @@ class Base:
 
     @classmethod
     def create(cls, **dictionary):
+        """ returns an instance with all attributes already set """
         if cls.__name__ == "Rectangle":
             new = cls(1, 1)
         if cls.__name__ == "Square":
@@ -51,9 +57,10 @@ class Base:
 
     @classmethod
     def load_from_file(cls):
+        """ returns a list of instances """
         try:
             lista = []
-            with open(cls.__name__ + ".json", mode="r", encoding="UTF-8") as f:
+            with open(cls.__name__ + ".json", mode="r", encoding="utf-8") as f:
                 file = f.read()
             text = cls.from_json_string(file)
             for i in text:
@@ -68,18 +75,20 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
+        """ serialize and save in csv """
         dicc = [p.to_dictionary() for p in list_objs]
-        with open(cls.__name__ + ".csv", mode="w", encoding="UTF-8") as f:
+        with open(cls.__name__ + ".csv", mode="w", encoding="utf-8") as f:
             escribiendo = csv.DictWriter(f, dicc[0].keys())
             escribiendo.writeheader()
             escribiendo.writerows(dicc)
 
     @classmethod
     def load_from_file_csv(cls):
+        """ deseriaze and load csv file """
         try:
             lista = []
             dic = {}
-            with open(cls.__name__ + ".csv", mode="r", encoding="UTF-8") as f:
+            with open(cls.__name__ + ".csv", mode="r", encoding="utf-8") as f:
                 leyendo = csv.DictReader(f)
                 for i in leyendo:
                     for k, v in dict(i).items():

@@ -7,19 +7,23 @@ class Square(Rectangle):
     """ class Square ihnertes Rectangle """
 
     def __init__(self, size, x=0, y=0, id=None):
+        """ constructor """
         Rectangle.__init__(self, width=size, height=size, x=x, y=y, id=id)
 
     @property
     def size(self):
+        """ getter width """
         return self.width
 
     @size.setter
     def size(self, value):
+        """ setter """
         self.width = value
         self.height = value
 
     def __str__(self):
-        return ("[Square] ({:d}) {:d}/{:d} - {:d}".
+        """ str square """
+        return ("[Square] ({}) {:d}/{:d} - {:d}".
                 format(self.id, self.x, self.y, self.width))
 
     def update(self, *args, **kwargs):
@@ -37,6 +41,7 @@ class Square(Rectangle):
                 setattr(self, k, v)
 
     def to_dictionary(self):
+        """ square dictionary """
         dic = {}
         dic["id"] = self.id
         dic["size"] = self.size
