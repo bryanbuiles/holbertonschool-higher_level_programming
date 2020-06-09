@@ -149,6 +149,12 @@ class TestBase(unittest.TestCase):
 
         self.assertTrue(os.path.isfile('Rectangle.json'))
         self.assertTrue(os.path.isfile('Square.json'))
+        with self.assertRaises(TypeError):
+            Rectangle.save_to_file()
+        with self.assertRaises(AttributeError):
+            Rectangle.save_to_file([2, 2.4])
+        with self.assertRaises(TypeError):
+            Rectangle.save_to_file(1, 2)
 
 
 if __name__ == '__main__':
