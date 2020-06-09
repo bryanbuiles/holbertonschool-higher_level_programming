@@ -34,6 +34,8 @@ class TestBase(unittest.TestCase):
         test11 = Base((1, 2))
         test12 = Base((1, 2, 3))
         test13 = Base(True)
+        test14 = Base(-5)
+        test15 = Base([[1, 2, 3], [12, 5, 6]])
 
         self.assertEqual(test1.id, 1)
         self.assertEqual(test2.id, 7)
@@ -48,6 +50,10 @@ class TestBase(unittest.TestCase):
         self.assertEqual(test11.id, (1, 2))
         self.assertEqual(test12.id, (1, 2, 3))
         self.assertEqual(test13.id, True)
+        self.assertEqual(test14.id, -5)
+        self.assertEqual(test15.id, [[1, 2, 3], [12, 5, 6]])
+        with self.assertRaises(TypeError):
+            Base(2, 5)
 
     def test_to_json_string(self):
         """ test to_json_string function """
@@ -58,17 +64,27 @@ class TestBase(unittest.TestCase):
         test5 = 5897
         test6 = [[5, 4, 8]]
         test7 = []
+        test8 = 5.5
+        test9 = [{}]
 
         self.assertCountEqual(Base.to_json_string(test1),
                               '[{"bryan": 1, "super": "hero"}]')
         self.assertCountEqual(Base.to_json_string(test2), '[{"bryan": 3}]')
-        self.assertCountEqual(Base.to_json_string(test3), '[]')
-        self.assertCountEqual(Base.to_json_string(test4), '"string"')
+        self.assertEqual(Base.to_json_string(test3), '[]')
+        self.assertEqual(Base.to_json_string(test4), '"string"')
         with self.assertRaises(TypeError):
             Base.to_json_string(test5)
-        self.assertCountEqual(Base.to_json_string(test6), '[[5, 4, 8]]')
-        self.assertCountEqual(Base.to_json_string(test7), '[]')
+        with self.assertRaises(TypeError):
+            Base.to_json_string(test8)
+        with self.assertRaises(TypeError):
+            Base.to_json_string()
+        with self.assertRaises(TypeError):
+            Base.to_json_string("string", "string")
+
+        self.assertEqual(Base.to_json_string(test6), '[[5, 4, 8]]')
+        self.assertEqual(Base.to_json_string(test7), '[]')
         self.assertEqual(len(Base.to_json_string(None)), 2)
+        self.assertEqual(Base.to_json_string(test9), '[{}]')
 
     def test_from_json_string(self):
         """ test from_json_string function """
@@ -149,12 +165,6 @@ class TestBase(unittest.TestCase):
 
         self.assertTrue(os.path.isfile('Rectangle.json'))
         self.assertTrue(os.path.isfile('Square.json'))
-        with self.assertRaises(TypeError):
-            Rectangle.save_to_file()
-        with self.assertRaises(AttributeError):
-            Rectangle.save_to_file([2, 2.4])
-        with self.assertRaises(TypeError):
-            Rectangle.save_to_file(1, 2)
 
 
 if __name__ == '__main__':
