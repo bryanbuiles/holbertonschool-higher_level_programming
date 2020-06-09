@@ -58,6 +58,8 @@ class TestSquare(unittest.TestCase):
             test25 = Square(2, 5, "bryan")
         with self.assertRaises(TypeError):
             test26 = Rectangle(True, 1)
+        with self.assertRaises(TypeError):
+            test27 = Rectangle()
 
         with self.assertRaises(ValueError):
             test13 = Square(5, -1)
@@ -96,6 +98,10 @@ class TestSquare(unittest.TestCase):
             test17 = Square(1, 1, float('nan'), 1)
         with self.assertRaises(TypeError):
             test26 = Square(1, 1, True, 1)
+        with self.assertRaises(TypeError):
+            test27 = Square()
+        with self.assertRaises(TypeError):
+            test28 = Square(5, 2, 3, 4, 5, 4, 5, 4)
 
     def test_raises_x(self):
         """ test raises errors for x """
@@ -145,8 +151,16 @@ class TestSquare(unittest.TestCase):
         test1.update(6, 8)
         self.assertEqual(test1.__str__(), "[Square] (6) 0/0 - 8")
 
+        test2 = Square(2, 3, 4, 5)
+        test2.update(**{'size': 136, 'y': 2})
+        self.assertEqual(test2.__str__(), "[Square] (5) 3/2 - 136")
+
+        test3 = Square(2, 3, 4, 6)
+        test3.update(17, x=5)
+        self.assertEqual(test3.__str__(), "[Square] (6) 5/4 - 2")
+
         with self.assertRaises(ValueError):
-            test1.update(**{'width': 137, 'y': -2})
+            test1.update(**{'width': 136, 'y': -2})
             test1.update(19, x=8.5)
 
     def test_Square_to_dictionary(self):

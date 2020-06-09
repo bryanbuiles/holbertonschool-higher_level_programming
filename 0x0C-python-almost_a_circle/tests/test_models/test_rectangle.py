@@ -194,17 +194,17 @@ class TestRectangle(unittest.TestCase):
 
     def test_display(self):
         """ test for display function """
-        test1 = Rectangle(2, 2)
+        test1 = Rectangle(3, 2)
         f = StringIO()
         with redirect_stdout(f):
             test1.display()
-            self.assertEqual(f.getvalue(), '##\n##\n')
+            self.assertEqual(f.getvalue(), '###\n###\n')
 
-        test2 = Rectangle(2, 2, 1, 1, 12)
+        test2 = Rectangle(3, 2, 1, 1, 12)
         j = StringIO()
         with redirect_stdout(j):
             test2.display()
-            self.assertEqual(j.getvalue(), '\n ##\n ##\n')
+            self.assertEqual(j.getvalue(), '\n ###\n ###\n')
 
 
 if __name__ == '__main__':

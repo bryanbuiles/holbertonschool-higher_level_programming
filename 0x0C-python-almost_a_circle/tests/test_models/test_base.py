@@ -69,7 +69,7 @@ class TestBase(unittest.TestCase):
 
         self.assertCountEqual(Base.to_json_string(test1),
                               '[{"bryan": 1, "super": "hero"}]')
-        self.assertCountEqual(Base.to_json_string(test2), '[{"bryan": 3}]')
+        self.assertEqual(Base.to_json_string(test2), '[{"bryan": 3}]')
         self.assertEqual(Base.to_json_string(test3), '[]')
         self.assertEqual(Base.to_json_string(test4), '"string"')
         with self.assertRaises(TypeError):
