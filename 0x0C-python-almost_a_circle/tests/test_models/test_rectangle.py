@@ -23,6 +23,8 @@ class TestRectangle(unittest.TestCase):
     def test_rectangle_instances(self):
         """ test for rectnagle instances """
         test1 = Rectangle(3, 2)
+        with self.assertRaises(ValueError):
+            test1.width = -10
         self.assertEqual(test1.id, 1)
         self.assertEqual(test1._Base__nb_objects, 1)
 
@@ -62,6 +64,8 @@ class TestRectangle(unittest.TestCase):
             test25 = Rectangle(2, 3, 5, "bryan")
         with self.assertRaises(TypeError):
             test26 = Rectangle(True, 1)
+        with self.assertRaises(TypeError):
+            test27 = Rectangle(1, 2, 3, 4, 35, 4, 5, 4)
 
     def test_raises_value(self):
         """ test for raises value """
@@ -162,13 +166,20 @@ class TestRectangle(unittest.TestCase):
     def test_Rectangle_str(self):
         """ test for test_Rectangle_str """
         test1 = Rectangle(2, 2)
-        self.assertEqual(test1.__str__(), "[Rectangle] (1) 0/0 - 2/2")
+        test1.x = 1
+        self.assertEqual(test1.__str__(), "[Rectangle] (1) 1/0 - 2/2")
 
         test2 = Rectangle(3, 2, 1, 1)
-        self.assertEqual(test2.__str__(), "[Rectangle] (2) 1/1 - 3/2")
+        test2.y = 2
+        self.assertEqual(test2.__str__(), "[Rectangle] (2) 1/2 - 3/2")
 
         test3 = Rectangle(3, 2, 1, 1, 12)
-        self.assertEqual(test3.__str__(), "[Rectangle] (12) 1/1 - 3/2")
+        test3.height = 3
+        self.assertEqual(test3.__str__(), "[Rectangle] (12) 1/1 - 3/3")
+
+        test4 = Rectangle(3, 2, 1, 1, 12)
+        test4.width = 5
+        self.assertEqual(test4.__str__(), "[Rectangle] (12) 1/1 - 5/2")
 
     def test_Rectangle_update(self):
         """ test for Rectangle_update """
@@ -186,11 +197,11 @@ class TestRectangle(unittest.TestCase):
         """ test for Rectangle_to_dictionary function """
         test1 = Rectangle(2, 2)
         dir1 = {'id': 1, 'width': 2, 'height': 2, 'x': 0, 'y': 0}
-        self.assertDictEqual(test1.to_dictionary(), dir1)
+        self.assertEqual(test1.to_dictionary(), dir1)
 
         test2 = Rectangle(2, 2, 7, 5, 12)
         dir2 = {'id': 12, 'width': 2, 'height': 2, 'x': 7, 'y': 5}
-        self.assertDictEqual(test2.to_dictionary(), dir2)
+        self.assertEqual(test2.to_dictionary(), dir2)
 
     def test_display(self):
         """ test for display function """

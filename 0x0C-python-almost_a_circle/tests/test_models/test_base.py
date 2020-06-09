@@ -36,6 +36,8 @@ class TestBase(unittest.TestCase):
         test13 = Base(True)
         test14 = Base(-5)
         test15 = Base([[1, 2, 3], [12, 5, 6]])
+        test16 = Base(7)
+        test16.id = 8
 
         self.assertEqual(test1.id, 1)
         self.assertEqual(test2.id, 7)
@@ -52,6 +54,7 @@ class TestBase(unittest.TestCase):
         self.assertEqual(test13.id, True)
         self.assertEqual(test14.id, -5)
         self.assertEqual(test15.id, [[1, 2, 3], [12, 5, 6]])
+        self.assertEqual(test16.id, 8)
         with self.assertRaises(TypeError):
             Base(2, 5)
 

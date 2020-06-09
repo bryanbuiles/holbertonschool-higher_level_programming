@@ -30,6 +30,9 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(test2.id, 7)
         self.assertEqual(test2._Base__nb_objects, 1)
 
+        with self.assertRaises(ValueError):
+            test1.width = -10
+
         with self.assertRaises(TypeError):
             test3 = Square("bryan")
         with self.assertRaises(TypeError):
@@ -57,9 +60,11 @@ class TestSquare(unittest.TestCase):
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             test25 = Square(2, 5, "bryan")
         with self.assertRaises(TypeError):
-            test26 = Rectangle(True, 1)
+            test26 = Square(True, 1)
         with self.assertRaises(TypeError):
-            test27 = Rectangle()
+            test27 = Square()
+        with self.assertRaises(TypeError):
+            test28 = Square(1, 2, 3, 4, 5, 6, 4, 7, 8)
 
         with self.assertRaises(ValueError):
             test13 = Square(5, -1)
@@ -137,13 +142,16 @@ class TestSquare(unittest.TestCase):
     def test_Square_str(self):
         """ test for square str """
         test1 = Square(2)
-        self.assertEqual(test1.__str__(), "[Square] (1) 0/0 - 2")
+        test1.width = 3
+        self.assertEqual(test1.__str__(), "[Square] (1) 0/0 - 3")
 
         test2 = Square(3, 1, 1)
-        self.assertEqual(test2.__str__(), "[Square] (2) 1/1 - 3")
+        test2.x = 2
+        self.assertEqual(test2.__str__(), "[Square] (2) 2/1 - 3")
 
         test3 = Square(3, 1, 1, 12)
-        self.assertEqual(test3.__str__(), "[Square] (12) 1/1 - 3")
+        test3.y = 3
+        self.assertEqual(test3.__str__(), "[Square] (12) 1/3 - 3")
 
     def test_Square_update(self):
         """ test for square """
@@ -167,11 +175,11 @@ class TestSquare(unittest.TestCase):
         """ test for square_to_dictionary function """
         test1 = Square(2)
         dir1 = {'id': 1, 'size': 2, 'x': 0, 'y': 0}
-        self.assertDictEqual(test1.to_dictionary(), dir1)
+        self.assertEqual(test1.to_dictionary(), dir1)
 
         test2 = Square(2, 7, 5, 12)
         dir2 = {'id': 12, 'size': 2, 'x': 7, 'y': 5}
-        self.assertDictEqual(test2.to_dictionary(), dir2)
+        self.assertEqual(test2.to_dictionary(), dir2)
 
     def test_display(self):
         """ test for display function """
