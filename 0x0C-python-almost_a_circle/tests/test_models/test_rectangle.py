@@ -69,13 +69,13 @@ class TestRectangle(unittest.TestCase):
             test15 = Rectangle(5, -8)
         with self.assertRaises(ValueError):
             test16 = Rectangle(-8, 5)
-        with self.assertRaisesRegex(ValueError, "width must be >= 0"):
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
             test19 = Rectangle(-8, 4)
         with self.assertRaisesRegex(ValueError, "x must be >= 0"):
             test20 = Rectangle(5, 2, -1)
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             tets21 = Rectangle(5, 2, 1, -1)
-        with self.assertRaisesRegex(ValueError, "height must be >= 0"):
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
             test22 = Rectangle(5, -8)
 
     def test_Rectangle_area(self):
