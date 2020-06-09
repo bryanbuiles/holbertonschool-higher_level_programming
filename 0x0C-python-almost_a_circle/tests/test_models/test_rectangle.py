@@ -1,83 +1,125 @@
 #!/usr/bin/python3
-"""Rectangle Test Module"""
+"""Unittest for class Rectangle
+"""
 import unittest
-import sys
-import io
+import os
+from io import StringIO
+from unittest.mock import patch
 from models.base import Base
 from models.rectangle import Rectangle
+from models.square import Square
 
 
 class TestRectangle(unittest.TestCase):
+    """Testing Rectangle
+    """
 
-    def test_rec(self):
-        r = Rectangle(1, 2)
-        self.assertEqual(isinstance(r, Base), True)
+    def tearDown(self):
+        """Tears down obj count
+        """
 
-    def test_id(self):
-        '''testing id'''
-        a = Rectangle(10, 2)
-        a2 = Rectangle(2, 10)
-        a3 = Rectangle(10, 20)
-        self.assertEqual(a2.id + 1, a3.id)
+        Base._Base__nb_objects = 0
+        self.assertEqual(Base._Base__nb_objects, 0)
 
-    def test_set(self):
-        a = Rectangle(10, 2)
-        a2 = Rectangle(2, 10)
-        a3 = Rectangle(10, 20)
-        a4 = Rectangle(10, 2, 0, 0, 12)
-        self.assertEqual(a2.id + 1, a3.id)
-        self.assertEqual(12, a4.id)
+    def test_instance(self):
+        """Test instantiation
+        """
 
-    def test_set_3(self):
+        o1 = Rectangle(3, 2)
+        o2 = Rectangle(8, 7, 0, 0, 12)
         with self.assertRaises(TypeError):
-            x = Rectangle("try", "this")
-        with self.assertRaises(TypeError):
-            x = Rectangle(5.0, 4.0)
-        with self.assertRaises(TypeError):
-            x = Rectangle(5.0, 4.0, "try")
-        with self.assertRaises(TypeError):
-            x = Rectangle(10, 2, 5.0, 4.0)
-        with self.assertRaises(TypeError):
-            x = Rectangle(1.0, 2.0, 3.0, 4.0)
+            o3 = Rectangle("string")
+            o4 = Rectangle(None)
+            o5 = Rectangle(float('inf'))
+            o6 = Rectangle(9.5, 9.3)
+            o7 = Rectangle(-8, 9)
+            o8 = Rectangle()
 
-    def test_set_4(self):
-        r = Rectangle(10, 2, 30)
-        r.update(69)
-        self.assertEqual(69, r.id)
-        r.update(69, 6)
-        self.assertEqual(6, r.width)
-        r.update(69, 6, 7)
-        self.assertEqual(7, r.height)
-        r.update(69, 6, 7, 8,)
-        self.assertEqual(8, r.x)
-        r.update(69, 6, 7, 8, 9)
-        self.assertEqual(9, r.y)
+        self.assertEqual(o1.id, 1)
+        self.assertEqual(o1._Base__nb_objects, 1)
+        self.assertEqual(o2.id, 12)
+        self.assertEqual(o2._Base__nb_objects, 1)
+
+    def test_area(self):
+        """Testing area()
+        """
+
+        o1 = Rectangle(3, 2)
+        o2 = Rectangle(8, 7, 0, 0, 12)
+        o3 = Rectangle(999, 999)
+
+        self.assertEqual(o1.area(), 6)
+        self.assertEqual(o2.area(), 56)
+        self.assertEqual(o3.area(), 998001)
+
+    def test_display(self):
+        """Testing display()
+        """
+
+        o1 = Rectangle(3, 2)
+        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+            o1.display()
+            self.assertEqual(fakeOutput.getvalue(), '###\n###\n')
+
+        o2 = Rectangle(4, 5, 0, 1, 12)
+        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+            o2.display()
+            self.assertEqual(fakeOutput.getvalue(),
+                             '\n####\n####\n####\n####\n####\n')
 
     def test_str(self):
-        r = Rectangle(4, 6, 2, 1, 12)
-        self.assertEqual("[Rectangle] (12) 2/1 - 4/6", str(r))
+        """Testing __str__()
+        """
 
-    def test_kwarg(self):
-        r = Rectangle(30, 11, 35, 23, 6)
-        r.update(69, id=6, width=9)
-        self.assertEqual(69, r.id)
+        o1 = Rectangle(3, 2)
+        o2 = Rectangle(8, 7, 0, 0, 12)
+        o3 = Rectangle(3, 2, 1)
+        o4 = Rectangle(3, 2, id="holberton")
 
-    '''def test_dict(self):
-        r = Rectangle(31, 11, 35, 23, 6)
-        r_dict = r.to_dictionary
-        self.assertEqual(r_dict['width'], 30)
-        self.assertEqual(r_dict['height'], 11)
-        self.assertEqual(r_dict['x'], 35)
-        self.assertEqual(r_dict['y'], 23)'''
+        self.assertEqual(o1.__str__(), '[Rectangle] (1) 0/0 - 3/2')
+        self.assertEqual(o2.__str__(), '[Rectangle] (12) 0/0 - 8/7')
+        self.assertEqual(o3.__str__(), '[Rectangle] (2) 1/0 - 3/2')
+        self.assertEqual(o4.__str__(), '[Rectangle] (holberton) 0/0 - 3/2')
 
-    def test_rec(self):
+    def test_update(self):
+        """Testing update()
+        """
+
+        o1 = Rectangle(3, 2)
+        o2 = Rectangle(8, 7, 0, 0, 12)
+        o3 = Rectangle(3, 2, 1)
+        o4 = Rectangle(3, 2, id="holberton")
+        o5 = Rectangle(3, 2, id="holberton")
+
+        o1.update(5, 7)
+        self.assertEqual(o1.__str__(), '[Rectangle] (5) 0/0 - 7/2')
         with self.assertRaises(ValueError):
-            x = Rectangle(-1, 2)
-        with self.assertRaises(ValueError):
-            x = Rectangle(1, -2)
-        with self.assertRaises(ValueError):
-            x = Rectangle(1, 2, -3)
+            o2.update(**{'id': 1337, 'x': -1})
+            o3.update("stringid", None, None)
+        o4.update(None)
+        self.assertEqual(o4.__str__(), '[Rectangle] (None) 0/0 - 3/2')
+        o5.update(-5)
+        self.assertEqual(o5.__str__(), '[Rectangle] (-5) 0/0 - 3/2')
 
-    def test_load_from_file(self):
-        p = Rectangle.load_from_file()
-        self.assertEqual(p, [])
+    def test_to_dictionary(self):
+        """Testing to_dictionary()
+        """
+
+        o1 = Rectangle(3, 2)
+        o2 = Rectangle(8, 7, 0, 0, 12)
+        o3 = Rectangle(3, 2, 1)
+        o4 = Rectangle(3, 2, id="holberton")
+
+        d1 = {'id': 1, 'width': 3, 'height': 2, 'x': 0, 'y': 0}
+        d2 = {'id': 12, 'width': 8, 'height': 7, 'x': 0, 'y': 0}
+        d3 = {'id': 2, 'width': 3, 'height': 2, 'x': 1, 'y': 0}
+        d4 = {'id': 'holberton', 'width': 3, 'height': 2, 'x': 0, 'y': 0}
+
+        self.assertDictEqual(o1.to_dictionary(), d1)
+        self.assertDictEqual(o2.to_dictionary(), d2)
+        self.assertDictEqual(o3.to_dictionary(), d3)
+        self.assertDictEqual(o4.to_dictionary(), d4)
+
+
+if __name__ == '__main__':
+    unittest.main()
