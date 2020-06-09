@@ -17,11 +17,13 @@ class TestSquare(unittest.TestCase):
 
     def tearDown(self):
         """ tear module """
+
         Base._Base__nb_objects = 0
         self.assertEqual(Base._Base__nb_objects, 0)
 
     def test_square_instances(self):
         """ test square_instances """
+
         test1 = Square(3)
         self.assertEqual(test1.id, 1)
         self.assertEqual(test1._Base__nb_objects, 1)
@@ -35,34 +37,49 @@ class TestSquare(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             test3 = Square("bryan")
+
         with self.assertRaises(TypeError):
             tets4 = Square(None)
+
         with self.assertRaises(TypeError):
             test5 = Square(float("inf"))
+
         with self.assertRaises(TypeError):
             test6 = Square(5.5, 6.6)
+
         with self.assertRaises(TypeError):
             test8 = Square()
+
         with self.assertRaises(TypeError):
             test9 = Square(["hello"])
+
         with self.assertRaises(TypeError):
             test10 = Square({"hello": "bryan"})
+
         with self.assertRaises(TypeError):
             test11 = Square((1, 1))
+
         with self.assertRaises(TypeError):
             test12 = Square((1, 1, 1))
+
         with self.assertRaises(TypeError):
             test17 = Square(float('nan'))
+
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
             test18 = Square("bryan", 1)
+
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             test24 = Square(2, "bryan")
+
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             test25 = Square(2, 5, "bryan")
+
         with self.assertRaises(TypeError):
             test26 = Square(True, 1)
+
         with self.assertRaises(TypeError):
             test27 = Square()
+
         with self.assertRaises(TypeError):
             test28 = Square(1, 2, 3, 4, 5, 6, 4, 7, 8)
 
@@ -83,6 +100,7 @@ class TestSquare(unittest.TestCase):
 
     def test_raises_y(self):
         """ test raises errors for y """
+
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             test3 = Square(1, 1, "bryan", 1)
         with self.assertRaises(TypeError):
@@ -110,6 +128,7 @@ class TestSquare(unittest.TestCase):
 
     def test_raises_x(self):
         """ test raises errors for x """
+
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             test3 = Square(1, "bryan", 1)
         with self.assertRaises(TypeError):
@@ -133,6 +152,7 @@ class TestSquare(unittest.TestCase):
 
     def test_Square_area(self):
         """ test for Square area """
+
         test1 = Square(3)
         self.assertEqual(test1.area(), 9)
 
@@ -141,6 +161,7 @@ class TestSquare(unittest.TestCase):
 
     def test_Square_str(self):
         """ test for square str """
+
         test1 = Square(2)
         test1.width = 3
         self.assertEqual(test1.__str__(), "[Square] (1) 0/0 - 3")
@@ -155,6 +176,7 @@ class TestSquare(unittest.TestCase):
 
     def test_Square_update(self):
         """ test for square """
+
         test1 = Square(2)
         test1.update(6, 8)
         self.assertEqual(test1.__str__(), "[Square] (6) 0/0 - 8")
@@ -173,6 +195,7 @@ class TestSquare(unittest.TestCase):
 
     def test_Square_to_dictionary(self):
         """ test for square_to_dictionary function """
+
         test1 = Square(2)
         dir1 = {'id': 1, 'size': 2, 'x': 0, 'y': 0}
         self.assertEqual(test1.to_dictionary(), dir1)
@@ -183,6 +206,7 @@ class TestSquare(unittest.TestCase):
 
     def test_display(self):
         """ test for display function """
+
         test1 = Square(2)
         f = StringIO()
         with redirect_stdout(f):

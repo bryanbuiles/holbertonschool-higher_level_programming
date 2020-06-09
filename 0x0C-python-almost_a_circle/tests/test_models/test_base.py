@@ -16,11 +16,13 @@ class TestBase(unittest.TestCase):
 
     def tearDown(self):
         """ tear down """
+
         Base._Base__nb_objects = 0
         self.assertEqual(Base._Base__nb_objects, 0)
 
     def test_base_instances(self):
         """ test instances """
+
         test1 = Base()
         test2 = Base(7)
         test3 = Base("bryan")
@@ -60,6 +62,7 @@ class TestBase(unittest.TestCase):
 
     def test_to_json_string(self):
         """ test to_json_string function """
+
         test1 = [{"bryan": 1, "super": "hero"}]
         test2 = [{"bryan": 3}]
         test3 = None
@@ -70,8 +73,8 @@ class TestBase(unittest.TestCase):
         test8 = 5.5
         test9 = [{}]
 
-        self.assertCountEqual(Base.to_json_string(test1),
-                              '[{"bryan": 1, "super": "hero"}]')
+        self.assertEqual(Base.to_json_string(test1),
+                         '[{"bryan": 1, "super": "hero"}]')
         self.assertEqual(Base.to_json_string(test2), '[{"bryan": 3}]')
         self.assertEqual(Base.to_json_string(test3), '[]')
         self.assertEqual(Base.to_json_string(test4), '"string"')
@@ -91,6 +94,7 @@ class TestBase(unittest.TestCase):
 
     def test_from_json_string(self):
         """ test from_json_string function """
+
         test1 = [{"bryan": 1, "hero": "too"}]
         result1 = Base.to_json_string(test1)
         test2 = [{"bryan": 3}]
@@ -117,6 +121,7 @@ class TestBase(unittest.TestCase):
 
     def test_create(self):
         """ test for create function """
+
         test1 = {'id': 2, 'width': 3, 'height': 2, 'x': 3, 'y': 5}
         result1 = Rectangle.create(**test1)
         self.assertEqual(result1.__str__(), '[Rectangle] (2) 3/5 - 3/2')
@@ -134,6 +139,7 @@ class TestBase(unittest.TestCase):
 
     def test_load_from_file(self):
         """ test for test_load_from_file """
+
         test1 = Rectangle(5, 2, 7, 7)
         test2 = Rectangle(3, 1, 5)
         test3 = Square(9, 5, 3)
@@ -158,6 +164,7 @@ class TestBase(unittest.TestCase):
 
     def test_save_to_file(self):
         """ test for save_to_file function """
+
         test1 = Rectangle(5, 2, 7, 7)
         test2 = Rectangle(3, 1, 5)
         test3 = Square(9, 5, 3)

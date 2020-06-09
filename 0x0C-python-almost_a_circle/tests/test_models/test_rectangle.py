@@ -17,11 +17,13 @@ class TestRectangle(unittest.TestCase):
 
     def tearDown(self):
         """ tear module unnitest """
+
         Base._Base__nb_objects = 0
         self.assertEqual(Base._Base__nb_objects, 0)
 
     def test_rectangle_instances(self):
         """ test for rectnagle instances """
+
         test1 = Rectangle(3, 2)
         with self.assertRaises(ValueError):
             test1.width = -10
@@ -34,6 +36,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_rectangle_raises_width(self):
         """ test for rectangle_raises_errors """
+
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
             test3 = Rectangle("bryan", 1)
         with self.assertRaises(TypeError):
@@ -69,6 +72,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_raises_value(self):
         """ test for raises value """
+
         with self.assertRaises(ValueError):
             test13 = Rectangle(5, 2, -1)
         with self.assertRaises(ValueError):
@@ -88,6 +92,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_raises_heigh(self):
         """ test raises errors for height """
+
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
             test3 = Rectangle(1, "bryan", 1)
         with self.assertRaises(TypeError):
@@ -111,6 +116,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_raises_y(self):
         """ test raises errors for y """
+
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             test3 = Rectangle(1, 1, 1, "bryan", 1)
         with self.assertRaises(TypeError):
@@ -134,6 +140,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_raises_x(self):
         """ test raises errors for x """
+
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             test3 = Rectangle(1, 1, "bryan", 1)
         with self.assertRaises(TypeError):
@@ -157,6 +164,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_Rectangle_area(self):
         """ test for Rectangle_area """
+
         test1 = Rectangle(3, 2)
         self.assertEqual(test1.area(), 6)
 
@@ -165,6 +173,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_Rectangle_str(self):
         """ test for test_Rectangle_str """
+
         test1 = Rectangle(2, 2)
         test1.x = 1
         self.assertEqual(test1.__str__(), "[Rectangle] (1) 1/0 - 2/2")
@@ -183,6 +192,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_Rectangle_update(self):
         """ test for Rectangle_update """
+
         test1 = Rectangle(2, 2)
         test1.update(6, 8)
         self.assertEqual(test1.__str__(), "[Rectangle] (6) 0/0 - 8/2")
@@ -195,6 +205,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_Rectangle_to_dictionary(self):
         """ test for Rectangle_to_dictionary function """
+
         test1 = Rectangle(2, 2)
         dir1 = {'id': 1, 'width': 2, 'height': 2, 'x': 0, 'y': 0}
         self.assertEqual(test1.to_dictionary(), dir1)
@@ -205,6 +216,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_display(self):
         """ test for display function """
+
         test1 = Rectangle(3, 2)
         f = StringIO()
         with redirect_stdout(f):
