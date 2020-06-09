@@ -30,7 +30,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(test2.id, 7)
         self.assertEqual(test2._Base__nb_objects, 1)
 
-    def test_rectangle_raises_errors(self):
+    def test_rectangle_raises_width(self):
         """ test for rectangle_raises_errors """
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
             test3 = Rectangle("bryan", 1)
@@ -60,7 +60,11 @@ class TestRectangle(unittest.TestCase):
             test24 = Rectangle(2, 3, "bryan")
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             test25 = Rectangle(2, 3, 5, "bryan")
+        with self.assertRaises(TypeError):
+            test26 = Rectangle(True, 1)
 
+    def test_raises_value(self):
+        """ test for raises value """
         with self.assertRaises(ValueError):
             test13 = Rectangle(5, 2, -1)
         with self.assertRaises(ValueError):
@@ -77,6 +81,75 @@ class TestRectangle(unittest.TestCase):
             tets21 = Rectangle(5, 2, 1, -1)
         with self.assertRaisesRegex(ValueError, "height must be > 0"):
             test22 = Rectangle(5, -8)
+
+    def test_raises_heigh(self):
+        """ test raises errors for height """
+        with self.assertRaisesRegex(TypeError, "height must be an integer"):
+            test3 = Rectangle(1, "bryan", 1)
+        with self.assertRaises(TypeError):
+            tets4 = Rectangle(1, None, 1)
+        with self.assertRaises(TypeError):
+            test5 = Rectangle(1, float("inf"), 1)
+        with self.assertRaises(TypeError):
+            test6 = Rectangle(1, 5.5, 6.6)
+        with self.assertRaises(TypeError):
+            test9 = Rectangle(1, ["hello"], 1)
+        with self.assertRaises(TypeError):
+            test10 = Rectangle(1, {"hello": "bryan"}, 1)
+        with self.assertRaises(TypeError):
+            test11 = Rectangle(1, (1, 1), 1)
+        with self.assertRaises(TypeError):
+            test12 = Rectangle(1, (1, 1, 1), 1)
+        with self.assertRaises(TypeError):
+            test17 = Rectangle(1, float('nan'), 1)
+        with self.assertRaises(TypeError):
+            test26 = Rectangle(1, True, 1)
+
+    def test_raises_y(self):
+        """ test raises errors for y """
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            test3 = Rectangle(1, 1, 1, "bryan", 1)
+        with self.assertRaises(TypeError):
+            tets4 = Rectangle(1, 1, 1, None, 1)
+        with self.assertRaises(TypeError):
+            test5 = Rectangle(1, 1, 1, float("inf"), 1)
+        with self.assertRaises(TypeError):
+            test6 = Rectangle(1, 1, 1, 5.5, 6.6)
+        with self.assertRaises(TypeError):
+            test9 = Rectangle(1, 1, 1, ["hello"], 1)
+        with self.assertRaises(TypeError):
+            test10 = Rectangle(1, 1, 1, {"hello": "bryan"}, 1)
+        with self.assertRaises(TypeError):
+            test11 = Rectangle(1, 1, 1, (1, 1), 1)
+        with self.assertRaises(TypeError):
+            test12 = Rectangle(1, 1, 1, (1, 1, 1), 1)
+        with self.assertRaises(TypeError):
+            test17 = Rectangle(1, 1, 1, float('nan'), 1)
+        with self.assertRaises(TypeError):
+            test26 = Rectangle(1, 1, 1, True, 1)
+
+    def test_raises_x(self):
+        """ test raises errors for x """
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            test3 = Rectangle(1, 1, "bryan", 1)
+        with self.assertRaises(TypeError):
+            tets4 = Rectangle(1, 1, None, 1)
+        with self.assertRaises(TypeError):
+            test5 = Rectangle(1, 1, float("inf"), 1)
+        with self.assertRaises(TypeError):
+            test6 = Rectangle(1, 1, 5.5, 6.6)
+        with self.assertRaises(TypeError):
+            test9 = Rectangle(1, 1, ["hello"], 1)
+        with self.assertRaises(TypeError):
+            test10 = Rectangle(1, 1, {"hello": "bryan"}, 1)
+        with self.assertRaises(TypeError):
+            test11 = Rectangle(1, 1, (1, 1), 1)
+        with self.assertRaises(TypeError):
+            test12 = Rectangle(1, 1, (1, 1, 1), 1)
+        with self.assertRaises(TypeError):
+            test17 = Rectangle(1, 1, float('nan'), 1)
+        with self.assertRaises(TypeError):
+            test26 = Rectangle(1, 1, True, 1)
 
     def test_Rectangle_area(self):
         """ test for Rectangle_area """

@@ -56,6 +56,8 @@ class TestSquare(unittest.TestCase):
             test24 = Square(2, "bryan")
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             test25 = Square(2, 5, "bryan")
+        with self.assertRaises(TypeError):
+            test26 = Rectangle(True, 1)
 
         with self.assertRaises(ValueError):
             test13 = Square(5, -1)
@@ -71,6 +73,52 @@ class TestSquare(unittest.TestCase):
             test20 = Square(5, -1)
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             tets21 = Square(5, 1, -1)
+
+    def test_raises_y(self):
+        """ test raises errors for y """
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            test3 = Square(1, 1, "bryan", 1)
+        with self.assertRaises(TypeError):
+            tets4 = Square(1, 1, None, 1)
+        with self.assertRaises(TypeError):
+            test5 = Square(1, 1, float("inf"), 1)
+        with self.assertRaises(TypeError):
+            test6 = Square(1, 1, 5.5, 6.6)
+        with self.assertRaises(TypeError):
+            test9 = Square(1, 1, ["hello"], 1)
+        with self.assertRaises(TypeError):
+            test10 = Square(1, 1, {"hello": "bryan"}, 1)
+        with self.assertRaises(TypeError):
+            test11 = Square(1, 1, (1, 1), 1)
+        with self.assertRaises(TypeError):
+            test12 = Square(1, 1, (1, 1, 1), 1)
+        with self.assertRaises(TypeError):
+            test17 = Square(1, 1, float('nan'), 1)
+        with self.assertRaises(TypeError):
+            test26 = Square(1, 1, True, 1)
+
+    def test_raises_x(self):
+        """ test raises errors for x """
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            test3 = Square(1, "bryan", 1)
+        with self.assertRaises(TypeError):
+            tets4 = Square(1, None, 1)
+        with self.assertRaises(TypeError):
+            test5 = Square(1, float("inf"), 1)
+        with self.assertRaises(TypeError):
+            test6 = Square(1, 5.5, 6.6)
+        with self.assertRaises(TypeError):
+            test9 = Square(1, ["hello"], 1)
+        with self.assertRaises(TypeError):
+            test10 = Square(1, {"hello": "bryan"}, 1)
+        with self.assertRaises(TypeError):
+            test11 = Square(1, (1, 1), 1)
+        with self.assertRaises(TypeError):
+            test12 = Square(1, (1, 1, 1), 1)
+        with self.assertRaises(TypeError):
+            test17 = Square(1, float('nan'), 1)
+        with self.assertRaises(TypeError):
+            test26 = Square(1, True, 1)
 
     def test_Square_area(self):
         """ test for Square area """

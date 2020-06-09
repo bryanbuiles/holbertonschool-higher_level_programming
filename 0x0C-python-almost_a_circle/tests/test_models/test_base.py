@@ -33,6 +33,7 @@ class TestBase(unittest.TestCase):
         test10 = Base(float('nan'))
         test11 = Base((1, 2))
         test12 = Base((1, 2, 3))
+        test13 = Base(True)
 
         self.assertEqual(test1.id, 1)
         self.assertEqual(test2.id, 7)
@@ -46,6 +47,7 @@ class TestBase(unittest.TestCase):
         self.assertTrue(test10.id != float('nan'))
         self.assertEqual(test11.id, (1, 2))
         self.assertEqual(test12.id, (1, 2, 3))
+        self.assertEqual(test13.id, True)
 
     def test_to_json_string(self):
         """ test to_json_string function """
