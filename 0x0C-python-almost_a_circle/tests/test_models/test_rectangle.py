@@ -18,7 +18,6 @@ class TestRectangle(unittest.TestCase):
     def tearDown(self):
         """Tears down obj count
         """
-
         Base._Base__nb_objects = 0
         self.assertEqual(Base._Base__nb_objects, 0)
 
@@ -31,13 +30,11 @@ class TestRectangle(unittest.TestCase):
 
     def test_rectangle_instances(self):
         """ test for rectnagle instances """
-
         test1 = Rectangle(3, 2)
         with self.assertRaises(ValueError):
             test1.width = -10
         self.assertEqual(test1.id, 1)
         self.assertEqual(test1._Base__nb_objects, 1)
-
         test2 = Rectangle(5, 2, 0, 0, 7)
         self.assertEqual(test2.id, 7)
         self.assertEqual(test2._Base__nb_objects, 1)
@@ -45,18 +42,15 @@ class TestRectangle(unittest.TestCase):
     def test_area(self):
         """Testing area()
         """
-
         o1 = Rectangle(3, 2)
         o2 = Rectangle(8, 7, 0, 0, 12)
         o3 = Rectangle(999, 999)
-
         self.assertEqual(o1.area(), 6)
         self.assertEqual(o2.area(), 56)
         self.assertEqual(o3.area(), 998001)
 
     def test_rectangle_raises_width(self):
         """ test for rectangle_raises_errors """
-
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
             test3 = Rectangle("bryan", 1)
         with self.assertRaises(TypeError):
@@ -92,7 +86,6 @@ class TestRectangle(unittest.TestCase):
 
     def test_raises_value(self):
         """ test for raises value """
-
         with self.assertRaises(ValueError):
             test13 = Rectangle(5, 2, -1)
         with self.assertRaises(ValueError):
@@ -112,7 +105,6 @@ class TestRectangle(unittest.TestCase):
 
     def test_raises_heigh(self):
         """ test raises errors for height """
-
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
             test3 = Rectangle(1, "bryan", 1)
         with self.assertRaises(TypeError):
@@ -136,7 +128,6 @@ class TestRectangle(unittest.TestCase):
 
     def test_raises_y(self):
         """ test raises errors for y """
-
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             test3 = Rectangle(1, 1, 1, "bryan", 1)
         with self.assertRaises(TypeError):
@@ -160,7 +151,6 @@ class TestRectangle(unittest.TestCase):
 
     def test_raises_x(self):
         """ test raises errors for x """
-
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             test3 = Rectangle(1, 1, "bryan", 1)
         with self.assertRaises(TypeError):
@@ -185,12 +175,10 @@ class TestRectangle(unittest.TestCase):
     def test_display(self):
         """Testing display()
         """
-
         o1 = Rectangle(3, 2)
         with patch('sys.stdout', new=StringIO()) as fakeOutput:
             o1.display()
             self.assertEqual(fakeOutput.getvalue(), '###\n###\n')
-
         o2 = Rectangle(4, 5, 0, 1, 12)
         with patch('sys.stdout', new=StringIO()) as fakeOutput:
             o2.display()
@@ -200,12 +188,10 @@ class TestRectangle(unittest.TestCase):
     def test_str(self):
         """Testing __str__()
         """
-
         o1 = Rectangle(3, 2)
         o2 = Rectangle(8, 7, 0, 0, 12)
         o3 = Rectangle(3, 2, 1)
         o4 = Rectangle(3, 2, id="holberton")
-
         self.assertEqual(o1.__str__(), '[Rectangle] (1) 0/0 - 3/2')
         self.assertEqual(o2.__str__(), '[Rectangle] (12) 0/0 - 8/7')
         self.assertEqual(o3.__str__(), '[Rectangle] (2) 1/0 - 3/2')
@@ -214,13 +200,11 @@ class TestRectangle(unittest.TestCase):
     def test_update(self):
         """Testing update()
         """
-
         o1 = Rectangle(3, 2)
         o2 = Rectangle(8, 7, 0, 0, 12)
         o3 = Rectangle(3, 2, 1)
         o4 = Rectangle(3, 2, id="holberton")
         o5 = Rectangle(3, 2, id="holberton")
-
         o1.update(5, 7)
         self.assertEqual(o1.__str__(), '[Rectangle] (5) 0/0 - 7/2')
         with self.assertRaises(ValueError):
@@ -234,17 +218,14 @@ class TestRectangle(unittest.TestCase):
     def test_to_dictionary(self):
         """Testing to_dictionary()
         """
-
         o1 = Rectangle(3, 2)
         o2 = Rectangle(8, 7, 0, 0, 12)
         o3 = Rectangle(3, 2, 1)
         o4 = Rectangle(3, 2, id="holberton")
-
         d1 = {'id': 1, 'width': 3, 'height': 2, 'x': 0, 'y': 0}
         d2 = {'id': 12, 'width': 8, 'height': 7, 'x': 0, 'y': 0}
         d3 = {'id': 2, 'width': 3, 'height': 2, 'x': 1, 'y': 0}
         d4 = {'id': 'holberton', 'width': 3, 'height': 2, 'x': 0, 'y': 0}
-
         self.assertDictEqual(o1.to_dictionary(), d1)
         self.assertDictEqual(o2.to_dictionary(), d2)
         self.assertDictEqual(o3.to_dictionary(), d3)
