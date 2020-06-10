@@ -22,7 +22,7 @@ class TestBase(unittest.TestCase):
     def test_pep8_conformance(self):
         """Test that we conform to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/rectangle.py'])
+        result = pep8style.check_files(['models/base.py'])
         self.assertEqual(
             result.total_errors, 0, "Found code style errors (and warnings).")
 
@@ -71,27 +71,26 @@ class TestBase(unittest.TestCase):
         """Testing to_json_string()
         """
 
-        o1_1 = [{"hi": 1, "yo": "hol"}]
-        o1_2 = [{"hello": 3}]
-        o1_3 = None
-        o1_4 = "a string"
-        o1_5 = 123
-        o1_6 = [[1, 2, 3]]
-        o1_7 = []
+        test1 = [{"bryan": 1, "hero": "hol"}]
+        test2 = [{"bryan": 3}]
+        test3 = None
+        test4 = "string"
+        test5 = 123
+        test6 = [[1, 2, 3]]
+        test7 = []
 
-        self.assertCountEqual(Base.to_json_string(o1_1),
-                              '[{"hi": 1, "yo": "hol"}]')
-        self.assertCountEqual(Base.to_json_string(o1_2), '[{"hello": 3}]')
-        self.assertCountEqual(Base.to_json_string(o1_3), '[]')
-        self.assertCountEqual(Base.to_json_string(o1_4), '"a string"')
+        self.assertCountEqual(Base.to_json_string(test1),
+                              '[{"bryan": 1, "hero": "hol"}]')
+        self.assertCountEqual(Base.to_json_string(test2), '[{"bryan": 3}]')
+        self.assertCountEqual(Base.to_json_string(test3), '[]')
+        self.assertCountEqual(Base.to_json_string(test4), '"string"')
         with self.assertRaises(TypeError):
-            Base.to_json_string(o1_5)
-        self.assertCountEqual(Base.to_json_string(o1_6), '[[1, 2, 3]]')
-        self.assertCountEqual(Base.to_json_string(o1_7), '[]')
+            Base.to_json_string(test5)
+        self.assertCountEqual(Base.to_json_string(test6), '[[1, 2, 3]]')
+        self.assertCountEqual(Base.to_json_string(test7), '[]')
 
     def test_from_json_string(self):
         """Testing from_json_string(), uses to_json_string to format,
-        anything not in format should return []
         """
 
         test1 = [{"bryan": 1, "hero": "too"}]
@@ -139,14 +138,13 @@ class TestBase(unittest.TestCase):
     def test_save_to_file(self):
         """Testing save_to_file()
         """
+        test1 = Rectangle(5, 2, 7, 7)
+        test2 = Rectangle(3, 1, 5)
+        test3 = Square(9, 5, 3)
+        test4 = Square(8, 5)
 
-        o4_1 = Rectangle(10, 7, 2, 8)
-        o4_2 = Rectangle(2, 4)
-        o4_3 = Square(10, 7, 2)
-        o4_4 = Square(8)
-
-        rsave = Rectangle.save_to_file([o4_1, o4_2])
-        ssave = Square.save_to_file([o4_3, o4_4])
+        rectanglesave = Rectangle.save_to_file([test1, test2])
+        squaresave = Square.save_to_file([test3, test4])
 
         self.assertTrue(os.path.isfile('Rectangle.json'))
         self.assertTrue(os.path.isfile('Square.json'))
