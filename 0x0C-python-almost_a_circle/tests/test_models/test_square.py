@@ -29,107 +29,201 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(
             result.total_errors, 0, "Found code style errors (and warnings).")
 
-    def test_instance(self):
-        """Test instantiation
-        """
+    def test_square_instances(self):
+        """ test square_instances """
 
-        o1 = Square(5)
-        o2 = Square(id="hello", size=3)
+        test1 = Square(3)
+        self.assertEqual(test1.id, 1)
+        self.assertEqual(test1._Base__nb_objects, 1)
+
+        test2 = Square(5, 0, 0, 7)
+        self.assertEqual(test2.id, 7)
+        self.assertEqual(test2._Base__nb_objects, 1)
+
         with self.assertRaises(ValueError):
-            o3 = Square(-5, 3, 4)
-            o4 = Square(9.5, 9.3)
-            o5 = Square(float('inf'))
-            o6 = Square("string")
-            o9 = Square(None)
+            test1.width = -10
 
         with self.assertRaises(TypeError):
-            o7 = Square(5, "hi")
-            o8 = Square(5, None)
-            o10 = Square(5, float('inf'))
-            o11 = Square(5, 9.5)
-            o12 = Square()
+            test3 = Square("bryan")
 
-        self.assertEqual(o1.id, 1)
-        self.assertEqual(o1._Base__nb_objects, 3)
-        self.assertEqual(o2.id, 'hello')
-        self.assertEqual(o2._Base__nb_objects, 3)
+        with self.assertRaises(TypeError):
+            tets4 = Square(None)
 
-    def test_area(self):
-        """Testing area()
-        """
+        with self.assertRaises(TypeError):
+            test5 = Square(float("inf"))
 
-        o1 = Square(5)
-        o2 = Square(999, 0, 0, "helloo")
-        o3 = Square(id="hello", size=3, x=1, y=0)
+        with self.assertRaises(TypeError):
+            test6 = Square(5.5, 6.6)
 
-        self.assertEqual(o1.area(), 25)
-        self.assertEqual(o2.area(), 998001)
-        self.assertEqual(o3.area(), 9)
+        with self.assertRaises(TypeError):
+            test8 = Square()
+
+        with self.assertRaises(TypeError):
+            test9 = Square(["hello"])
+
+        with self.assertRaises(TypeError):
+            test10 = Square({"hello": "bryan"})
+
+        with self.assertRaises(TypeError):
+            test11 = Square((1, 1))
+
+        with self.assertRaises(TypeError):
+            test12 = Square((1, 1, 1))
+
+        with self.assertRaises(TypeError):
+            test17 = Square(float('nan'))
+
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            test18 = Square("bryan", 1)
+
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            test24 = Square(2, "bryan")
+
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            test25 = Square(2, 5, "bryan")
+
+        with self.assertRaises(TypeError):
+            test26 = Square(True, 1)
+
+        with self.assertRaises(TypeError):
+            test27 = Square()
+
+        with self.assertRaises(TypeError):
+            test28 = Square(1, 2, 3, 4, 5, 6, 4, 7, 8)
+
+        with self.assertRaises(ValueError):
+            test13 = Square(5, -1)
+        with self.assertRaises(ValueError):
+            tets14 = Square(5, 1, -1)
+        with self.assertRaises(ValueError):
+            test15 = Square(5, -8)
+        with self.assertRaises(ValueError):
+            test16 = Square(-8, 5)
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            test19 = Square(-8)
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+            test20 = Square(5, -1)
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            tets21 = Square(5, 1, -1)
+
+    def test_raises_y(self):
+        """ test raises errors for y """
+
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            test3 = Square(1, 1, "bryan", 1)
+        with self.assertRaises(TypeError):
+            tets4 = Square(1, 1, None, 1)
+        with self.assertRaises(TypeError):
+            test5 = Square(1, 1, float("inf"), 1)
+        with self.assertRaises(TypeError):
+            test6 = Square(1, 1, 5.5, 6.6)
+        with self.assertRaises(TypeError):
+            test9 = Square(1, 1, ["hello"], 1)
+        with self.assertRaises(TypeError):
+            test10 = Square(1, 1, {"hello": "bryan"}, 1)
+        with self.assertRaises(TypeError):
+            test11 = Square(1, 1, (1, 1), 1)
+        with self.assertRaises(TypeError):
+            test12 = Square(1, 1, (1, 1, 1), 1)
+        with self.assertRaises(TypeError):
+            test17 = Square(1, 1, float('nan'), 1)
+        with self.assertRaises(TypeError):
+            test26 = Square(1, 1, True, 1)
+        with self.assertRaises(TypeError):
+            test27 = Square()
+        with self.assertRaises(TypeError):
+            test28 = Square(5, 2, 3, 4, 5, 4, 5, 4)
+
+    def test_raises_x(self):
+        """ test raises errors for x """
+
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            test3 = Square(1, "bryan", 1)
+        with self.assertRaises(TypeError):
+            tets4 = Square(1, None, 1)
+        with self.assertRaises(TypeError):
+            test5 = Square(1, float("inf"), 1)
+        with self.assertRaises(TypeError):
+            test6 = Square(1, 5.5, 6.6)
+        with self.assertRaises(TypeError):
+            test9 = Square(1, ["hello"], 1)
+        with self.assertRaises(TypeError):
+            test10 = Square(1, {"hello": "bryan"}, 1)
+        with self.assertRaises(TypeError):
+            test11 = Square(1, (1, 1), 1)
+        with self.assertRaises(TypeError):
+            test12 = Square(1, (1, 1, 1), 1)
+        with self.assertRaises(TypeError):
+            test17 = Square(1, float('nan'), 1)
+        with self.assertRaises(TypeError):
+            test26 = Square(1, True, 1)
+
+    def test_Square_area(self):
+        """ test for Square area """
+
+        test1 = Square(3)
+        self.assertEqual(test1.area(), 9)
+
+        test2 = Square(5, 0, 1, 7)
+        self.assertEqual(test2.area(), 25)
+
+    def test_Square_str(self):
+        """ test for square str """
+
+        test1 = Square(2)
+        test1.width = 3
+        self.assertEqual(test1.__str__(), "[Square] (1) 0/0 - 3")
+
+        test2 = Square(3, 1, 1)
+        test2.x = 2
+        self.assertEqual(test2.__str__(), "[Square] (2) 2/1 - 3")
+
+        test3 = Square(3, 1, 1, 12)
+        test3.y = 3
+        self.assertEqual(test3.__str__(), "[Square] (12) 1/3 - 3")
+
+    def test_Square_update(self):
+        """ test for square """
+
+        test1 = Square(2)
+        test1.update(6, 8)
+        self.assertEqual(test1.__str__(), "[Square] (6) 0/0 - 8")
+
+        test2 = Square(2, 3, 4, 5)
+        test2.update(**{'size': 136, 'y': 2})
+        self.assertEqual(test2.__str__(), "[Square] (5) 3/2 - 136")
+
+        test3 = Square(2, 3, 4, 6)
+        test3.update(17, x=5)
+        self.assertEqual(test3.__str__(), "[Square] (6) 5/4 - 2")
+
+        with self.assertRaises(ValueError):
+            test1.update(**{'width': 136, 'y': -2})
+            test1.update(19, x=8.5)
+
+    def test_Square_to_dictionary(self):
+        """ test for square_to_dictionary function """
+
+        test1 = Square(2)
+        dir1 = {'id': 1, 'size': 2, 'x': 0, 'y': 0}
+        self.assertEqual(test1.to_dictionary(), dir1)
+
+        test2 = Square(2, 7, 5, 12)
+        dir2 = {'id': 12, 'size': 2, 'x': 7, 'y': 5}
+        self.assertEqual(test2.to_dictionary(), dir2)
 
     def test_display(self):
         """Testing display()
         """
-
-        o1 = Square(4)
-        o2 = Square(id="hello", size=3, x=1, y=0)
-
+        test1 = Square(2)
         with patch('sys.stdout', new=StringIO()) as fakeOutput:
-            o1.display()
-            self.assertEqual(fakeOutput.getvalue(), '####\n####\n####\n####\n')
-
+            test1.display()
+            self.assertEqual(fakeOutput.getvalue(), '##\n##\n')
+        test2 = Square(4, 0, 1, 12)
         with patch('sys.stdout', new=StringIO()) as fakeOutput:
-            o2.display()
-            self.assertEqual(fakeOutput.getvalue(), ' ###\n ###\n ###\n')
-
-    def test_str(self):
-        """Testing __str__()
-        """
-
-        o1 = Square(5)
-        o2 = Square(3, 2)
-        o3 = Square(1, 2, 3, 4)
-        o4 = Square(id="hello", size=3, x=1, y=0)
-
-        self.assertEqual(o1.__str__(), '[Square] (1) 0/0 - 5')
-        self.assertEqual(o2.__str__(), '[Square] (2) 2/0 - 3')
-        self.assertEqual(o3.__str__(), '[Square] (4) 2/3 - 1')
-        self.assertEqual(o4.__str__(), '[Square] (hello) 1/0 - 3')
-
-    def test_update(self):
-        """Testing update()
-        """
-
-        o1 = Square(5)
-        o2 = Square(3, 2)
-        o3 = Square(1, 2, 3, 4)
-        o4 = Square(id="hello", size=3, x=1, y=0)
-
-        o1.update(6, 1, 2, 8)
-        self.assertEqual(o1.__str__(), '[Square] (6) 2/8 - 1')
-        o2.update(1, 2, 3, id="hello")
-        self.assertEqual(o2.__str__(), '[Square] (hello) 2/0 - 3')
-        with self.assertRaises(ValueError):
-            o3.update("hello", -5)
-            o4.update(x=9.5)
-
-    def test_to_dictionary(self):
-        """Testing to_dictionary()
-        """
-
-        o1 = Square(5)
-        o2 = Square(5, 6)
-        o3 = Square(1, 2, 3, 5)
-        o4 = Square(3, 2, id="holberton")
-
-        d1 = {'id': 1, 'size': 5, 'x': 0, 'y': 0}
-        d2 = {'id': 2, 'size': 5, 'x': 6, 'y': 0}
-        d3 = {'id': 5, 'size': 1, 'x': 2, 'y': 3}
-        d4 = {'id': 'holberton', 'size': 3, 'x': 2, 'y': 0}
-
-        self.assertDictEqual(o1.to_dictionary(), d1)
-        self.assertDictEqual(o2.to_dictionary(), d2)
-        self.assertDictEqual(o3.to_dictionary(), d3)
-        self.assertDictEqual(o4.to_dictionary(), d4)
+            test2.display()
+            self.assertEqual(fakeOutput.getvalue(),
+                             '\n####\n####\n####\n####\n')
 
 
 if __name__ == '__main__':
