@@ -176,13 +176,13 @@ class TestRectangle(unittest.TestCase):
         """Testing display()
         """
         test1 = Rectangle(3, 2)
-        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+        with patch('sys.stdout', new=StringIO()) as f:
             test1.display()
-            self.assertEqual(fakeOutput.getvalue(), '###\n###\n')
+            self.assertEqual(f.getvalue(), '###\n###\n')
         test2 = Rectangle(4, 5, 0, 1, 12)
-        with patch('sys.stdout', new=StringIO()) as fakeOutput:
+        with patch('sys.stdout', new=StringIO()) as f:
             test2.display()
-            self.assertEqual(fakeOutput.getvalue(),
+            self.assertEqual(f.getvalue(),
                              '\n####\n####\n####\n####\n####\n')
 
     def test_str(self):
@@ -191,41 +191,39 @@ class TestRectangle(unittest.TestCase):
         test1 = Rectangle(3, 2)
         test2 = Rectangle(8, 7, 0, 0, 12)
         test3 = Rectangle(3, 2, 1)
-        test4 = Rectangle(3, 2, id="holberton")
+        test4 = Rectangle(3, 2, id="bryan")
         self.assertEqual(test1.__str__(), '[Rectangle] (1) 0/0 - 3/2')
         self.assertEqual(test2.__str__(), '[Rectangle] (12) 0/0 - 8/7')
         self.assertEqual(test3.__str__(), '[Rectangle] (2) 1/0 - 3/2')
-        self.assertEqual(test4.__str__(), '[Rectangle] (holberton) 0/0 - 3/2')
+        self.assertEqual(test4.__str__(), '[Rectangle] (bryan) 0/0 - 3/2')
 
     def test_update(self):
         """Testing update()
         """
         test1 = Rectangle(3, 2)
         test2 = Rectangle(8, 7, 0, 0, 12)
-        test3 = Rectangle(3, 2, 1)
-        test4 = Rectangle(3, 2, id="holberton")
-        test5 = Rectangle(3, 2, id="holberton")
+        test4 = Rectangle(1, 2, id="bryan")
+        test5 = Rectangle(5, 2, id="bryan")
         test1.update(5, 7)
         self.assertEqual(test1.__str__(), '[Rectangle] (5) 0/0 - 7/2')
         with self.assertRaises(ValueError):
             test2.update(**{'id': 1337, 'x': -1})
-            test3.update("stringid", None, None)
         test4.update(None)
-        self.assertEqual(test4.__str__(), '[Rectangle] (None) 0/0 - 3/2')
-        test5.update(-5)
-        self.assertEqual(test5.__str__(), '[Rectangle] (-5) 0/0 - 3/2')
+        self.assertEqual(test4.__str__(), '[Rectangle] (None) 0/0 - 1/2')
+        test5.update(-100)
+        self.assertEqual(test5.__str__(), '[Rectangle] (-100) 0/0 - 5/2')
 
     def test_to_dictionary(self):
         """Testing to_dictionary()
         """
-        test1 = Rectangle(3, 2)
-        test2 = Rectangle(8, 7, 0, 0, 12)
-        test3 = Rectangle(3, 2, 1)
-        test4 = Rectangle(3, 2, id="holberton")
-        dirr1 = {'id': 1, 'width': 3, 'height': 2, 'x': 0, 'y': 0}
-        dirr2 = {'id': 12, 'width': 8, 'height': 7, 'x': 0, 'y': 0}
-        dirr3 = {'id': 2, 'width': 3, 'height': 2, 'x': 1, 'y': 0}
-        dirr4 = {'id': 'holberton', 'width': 3, 'height': 2, 'x': 0, 'y': 0}
+        test1 = Rectangle(2, 2)
+        test2 = Rectangle(1, 2, 0, 0, 7)
+        test3 = Rectangle(3, 2, 1, 4)
+        test4 = Rectangle(3, 2, id="bryan")
+        dirr1 = {'id': 1, 'width': 2, 'height': 2, 'x': 0, 'y': 0}
+        dirr2 = {'id': 7, 'width': 1, 'height': 2, 'x': 0, 'y': 0}
+        dirr3 = {'id': 2, 'width': 3, 'height': 2, 'x': 1, 'y': 4}
+        dirr4 = {'id': 'bryan', 'width': 3, 'height': 2, 'x': 0, 'y': 0}
         self.assertDictEqual(test1.to_dictionary(), dirr1)
         self.assertDictEqual(test2.to_dictionary(), dirr2)
         self.assertDictEqual(test3.to_dictionary(), dirr3)
