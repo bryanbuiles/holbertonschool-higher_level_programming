@@ -15,10 +15,11 @@ def States_func():
 
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    for id, state_name in session.query(State.id, State.name)\
-            .order_by(State.id)[0:1]:
-        print("{}: {}".format(id, state_name))
+    states = session.query(State.id, State.name).first()
+    if states is not None:
+        print((str("{}: {}".format(states.id, states.name))))
+    else:
+        print("Nothing")
     session.close()
 
 

@@ -15,8 +15,8 @@ def states():
     cur = db.cursor()
 
     cur.execute(
-        "SELECT * FROM states WHERE BINARY name = '{:s}'\
-            ORDER BY id ASC".format(sys.argv[4]))
+        """SELECT * FROM states WHERE name = %s\
+            ORDER BY id""", (sys.argv[4],))
 
     rows = cur.fetchall()
     for i in rows:
