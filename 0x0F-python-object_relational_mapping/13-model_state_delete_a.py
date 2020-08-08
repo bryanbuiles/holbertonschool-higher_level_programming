@@ -2,6 +2,7 @@
 """Start link class to table in database
 """
 import sys
+import sqlalchemy
 from model_state import Base, State
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import (create_engine)
@@ -15,10 +16,10 @@ def States_func():
 
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    for id, state_name in session.query(State.id, State.name)\
-            .order_by(State.id)[0:1]:
-        print("{}: {}".format(id, state_name))
+    states = session.query(State).filter(State.name.like('%a%'))
+    for state in states:
+        session.delete(state)
+    session.commit()
     session.close()
 
 

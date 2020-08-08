@@ -17,8 +17,9 @@ def States_func():
     session = Session()
 
     for id, state_name in session.query(State.id, State.name)\
-            .order_by(State.id)[0:1]:
+            .filter(State.name.contains("a")).order_by(State.id):
         print("{}: {}".format(id, state_name))
+
     session.close()
 
 

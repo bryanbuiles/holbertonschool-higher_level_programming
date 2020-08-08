@@ -16,9 +16,15 @@ def States_func():
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for id, state_name in session.query(State.id, State.name)\
-            .order_by(State.id)[0:1]:
-        print("{}: {}".format(id, state_name))
+    if session.query(State).filter(State.name == '{}'
+                                   .format(sys.argv[4])).first():
+        for id, state_name in session.query(State.id, State.name)\
+                .filter(State.name == '{}'
+                        .format(sys.argv[4])).order_by(State.id):
+            print("{}".format(id))
+    else:
+        print("Not found")
+
     session.close()
 
 

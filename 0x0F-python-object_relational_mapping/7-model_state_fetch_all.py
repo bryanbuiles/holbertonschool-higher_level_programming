@@ -19,6 +19,7 @@ def States_func():
     for id, state_name in session.query(State.id, State.name)\
             .order_by(State.id):
         print("{}: {}".format(id, state_name))
+    session.close()
 
 
 if __name__ == "__main__":

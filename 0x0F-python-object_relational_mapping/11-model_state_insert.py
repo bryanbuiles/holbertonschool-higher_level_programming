@@ -5,6 +5,7 @@ import sys
 from model_state import Base, State
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import (create_engine)
+import sqlalchemy
 
 
 def States_func():
@@ -15,10 +16,11 @@ def States_func():
 
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    for id, state_name in session.query(State.id, State.name)\
-            .order_by(State.id)[0:1]:
-        print("{}: {}".format(id, state_name))
+    ed_user = State(name='Louisiana')
+    session.add(ed_user)
+    state = session.query(State).filter_by(name="Louisiana").first()
+    print(str(state.id))
+    session.commit()
     session.close()
 
 
