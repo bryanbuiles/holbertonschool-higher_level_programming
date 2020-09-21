@@ -38,17 +38,17 @@ class Square extends Rectangle {
 
   charPrint (c) {
     if (c === undefined) {
-      this.print();
-    } else {
-      for (let i = 0; i < this.height; i++) {
-        const array = [];
-        for (let j = 0; j < this.width; j++) {
-          array.push(c);
-        }
-        console.log(array.join(''));
+      c = 'X';
+    }
+    for (let i = 0; i < this.height; i++) {
+      const array = [];
+      for (let j = 0; j < this.width; j++) {
+        array.push(c);
       }
+      console.log(array.join(''));
     }
   }
 }
+
 module.exports = Rectangle;
 module.exports = Square;
