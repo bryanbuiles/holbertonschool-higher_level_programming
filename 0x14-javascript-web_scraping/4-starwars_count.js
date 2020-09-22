@@ -4,16 +4,11 @@ const myArgs = process.argv;
 const request = require('request');
 const options = {
   url: myArgs[2],
-  method: 'GET',
-  headers: {
-    Accept: 'application/json',
-    'Accept-Charset': 'utf-8'
-  }
+  method: 'GET'
 };
 request(options, function (err, res, body) {
   if (err) {
-    console.error(err);
-    return;
+    console.log(err);
   }
   const json = JSON.parse(body);
   const results = json.results;
@@ -22,6 +17,7 @@ request(options, function (err, res, body) {
     for (const cara of items.characters) {
       if (cara === 'https://swapi-api.hbtn.io/api/people/18/') {
         count++;
+        break;
       }
     }
   }
