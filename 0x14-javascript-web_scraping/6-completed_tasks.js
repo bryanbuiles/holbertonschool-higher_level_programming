@@ -10,7 +10,7 @@ require('request').get(myArgs[2], function (err, r, body) {
     let count = 1;
     const lista = [];
     const json = JSON.parse(body);
-    for (let items of json) {
+    for (const items of json) {
       if (items.completed === true) {
         lista.push(items);
       }
