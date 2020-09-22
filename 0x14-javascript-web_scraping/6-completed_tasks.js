@@ -2,21 +2,27 @@
 
 const myArgs = process.argv;
 
-require('request').get(myArgs[2] + '?completed=true', function (err, r, body) {
+require('request').get(myArgs[2], function (err, r, body) {
   if (err) {
     console.log(err);
   } else {
     const dicti = {};
     let count = 1;
+    const lista = [];
     const json = JSON.parse(body);
-    for (let key = 0; key < json.length; key++) {
+    for (let items of json) {
+      if (items.completed === true) {
+        lista.push(items);
+      }
+    }
+    for (let key = 0; key < lista.length; key++) {
       if (key !== 0) {
-        if (json[key - 1].userId !== json[key].userId) {
+        if (lista[key - 1].userId !== lista[key].userId) {
           count = 1;
         } else {
           count++;
         }
-        dicti[json[key].userId] = count;
+        dicti[lista[key].userId] = count;
       }
     }
     console.log(dicti);
