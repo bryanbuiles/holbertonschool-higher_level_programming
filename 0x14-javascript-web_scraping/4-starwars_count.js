@@ -9,17 +9,18 @@ const options = {
 request(options, function (err, res, body) {
   if (err) {
     console.log(err);
-  }
-  const json = JSON.parse(body);
-  const results = json.results;
-  let count = 0;
-  for (const items of results) {
-    for (const cara of items.characters) {
-      if (cara === 'https://swapi-api.hbtn.io/api/people/18/') {
-        count++;
-        break;
+  } else {
+    const json = JSON.parse(body);
+    const results = json.results;
+    let count = 0;
+    for (const items of results) {
+      for (const cara of items.characters) {
+        if (cara === 'https://swapi-api.hbtn.io/api/people/18/') {
+          count++;
+          break;
+        }
       }
     }
+    console.log(count);
   }
-  console.log(count);
 });
