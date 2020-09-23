@@ -2,7 +2,7 @@
 
 const myArgs = process.argv;
 let j = 1;
-while (j < 9) {
+while (j < 10) {
   require('request').get(
     'https://swapi-api.hbtn.io/api/people/?page=' + j.toString(),
     function (err, r, body) {
